@@ -10,10 +10,11 @@
 <body>
 
     <nav>
-        <a href="{{ route('home') }}">Accueil</a> |
-        <a href="{{ route('about') }}">À propos</a> |
-        <a href="{{ route('contact') }}">Contact</a> |
-        <a href="{{ route('products.index') }}">Produits</a>
+    <a href="{{ route('home') }}">Accueil</a> |
+    <a href="{{ route('about') }}">À propos</a> |
+    <a href="{{ route('contact') }}">Contact</a> |
+    <a href="{{ route('products.index') }}">Produits</a> |
+    <a href="{{ route('categories.index') }}">Catégories</a>
     </nav>
 
     <hr>
