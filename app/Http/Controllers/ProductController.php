@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = [
-            ['name' => 'T-shirt Laravel', 'price' => 29.90],
-            ['name' => 'Mug PHP', 'price' => 12.50],
-            ['name' => 'Sticker Composer', 'price' => 2.00],
-        ];
-
+        $products = Product::all();
         return view('products.index', compact('products'));
     }
 
     public function show($id)
     {
-        return 'Produit n°' . $id;
+        $product = Product::findOrFail($id);
+        return view('products.show', compact('product'));
     }
 }
