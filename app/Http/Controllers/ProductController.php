@@ -21,11 +21,19 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        Product::create($request->all());
-        return redirect()->route('products.index')
-            ->with('success', 'Produit créé avec succès !');
-    }
+{
+    $request->validate([
+        'name'        => 'required|string|max:255',
+        'slug'        => 'required|string|unique:products,slug',
+        'price'       => 'required|numeric|min:0',
+        'stock'       => 'required|integer|min:0',
+        'category_id' => 'required|exists:categories,id',
+    ]);
+
+    Product::create($request->all());
+    return redirect()->route('products.index')
+        ->with('success', 'Produit créé avec succès !');
+}
 
     public function show($id)
     {
@@ -41,12 +49,21 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $product = Product::findOrFail($id);
-        $product->update($request->all());
-        return redirect()->route('products.index')
-            ->with('success', 'Produit modifié avec succès !');
-    }
+{
+    $product = Product::findOrFail($id);
+
+    $request->validate([
+        'name'        => 'required|string|max:255',
+        'slug'        => 'required|string|unique:products,slug,' . $product->id,
+        'price'       => 'required|numeric|min:0',
+        'stock'       => 'required|integer|min:0',
+        'category_id' => 'required|exists:categories,id',
+    ]);
+
+    $product->update($request->all());
+    return redirect()->route('products.index')
+        ->with('success', 'Produit modifié avec succès !');
+}
 
     public function destroy($id)
     {

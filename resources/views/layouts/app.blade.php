@@ -14,8 +14,11 @@
     <a href="{{ route('about') }}">À propos</a> |
     <a href="{{ route('contact') }}">Contact</a> |
     <a href="{{ route('products.index') }}">Produits</a> |
-    <a href="{{ route('categories.index') }}">Catégories</a>
-    </nav>
+    <a href="{{ route('categories.index') }}">Catégories</a> |
+    <a href="{{ route('cart.index') }}">
+        Panier ({{ count(session()->get('cart', [])) }})
+    </a>
+</nav>
 
     <hr>
 
